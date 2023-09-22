@@ -1,0 +1,107 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+.container{
+    box-sizing: border-box;
+    background-color:rgb(226, 226, 186);
+    width: 60%;
+    margin: auto;
+    padding: 10px 20px;
+    min-width: 280px;
+    margin-top: 50px;
+}
+h1{
+    text-align: center;
+}
+
+.center-div{
+    display: flex;
+}
+.todo-inp{
+    height: 26px;
+    border: 1px solid teal;
+    width: 70%;
+    font-size: 18px;
+    outline: none;   
+    resize: vertical;
+}
+.todo-btn{
+    width: 15%;
+    display: inline;
+    background-color: teal;
+    padding: 6px 2px;
+    color: white;
+    border: none;
+    margin-left: 1px;
+}
+.ul-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+ul{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+ul li{
+    width:76%; 
+    overflow-wrap: break-word;
+    word-break: break-all;
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 5px;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;    
+    
+}
+
+.li-btn{
+    cursor: default; 
+    background-color: teal;
+    text-align: center;
+    color: white;
+    padding: 2px 15px;
+    margin-left: 1px;
+    margin-top: 10px;  
+    /* resize: vertical; */
+    border-radius: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    .ul-div{
+        display: block;
+    }
+    ul li{
+        width: 96%;
+        margin-top: 12px;
+        padding: 5px;      
+    }
+    span{
+        display: block;
+        margin: 3px auto 0px auto;
+        width: 25%;   
+    }
+    .todo-inp{
+        width: 98%;
+    }
+    .center-div{
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+    }
+    .todo-btn{
+        width: 50%;
+        margin: auto;
+        margin-top: 5px;
+    }
+    ul{
+        margin-top: 0;
+    }
+    
+}
+

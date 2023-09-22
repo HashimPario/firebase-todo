@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import SignUp from "./components/signUp";
+import SignIn from "./components/signIn";
+import Todo from "./components/todo";
+import { useDispatch, useSelector } from "react-redux";
+import { onAuthStateChanged } from "firebase/auth";
+import { setUser } from "./store/slice";
+import { auth } from "./firebaseConfig";
+import Loader from "./components/loader";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const App = () => {
+    const location = window && window.location.pathname;
+    const showUser = useSelector((state) => state.todo.user);
+    const showLoader = useSelector((state) => state.todo.loader);
+    const dispatch = useDispatch()
+    onAuthStateChanged(auth, (data) => {
+        dispatch(setUser(data?.uid ? data.uid : ""))
+    })
+
+    return (
+        <>
+            <BrowserRouter>
+                {
+                    showUser === ""
+                        ?
+                        <Routes>
+                            <Route path="/" element={<SignIn />} />
+                            <Route path="/signup" element={<SignUp />} />
+                            <Route path="/todo" element={<Navigate to={'/'} />} />
+                            <Route path={location} element={<Navigate to={'/'} />} />
+                        </Routes>
+                        :
+                    showUser == 'loading'?
+                    <Loader />
+                    :
+                        <Routes>
+                            <Route path="/todo" element={<Todo />} />
+                        </Routes>
+                }
+            </BrowserRouter>
+        </>
+    )
 }
 
 export default App;
